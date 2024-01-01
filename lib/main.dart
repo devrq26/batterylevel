@@ -62,26 +62,22 @@ class _MyHomePageState extends State<MyHomePage> {
   // since it uses a domain name
   // it's more likely to be unique.
   // NOTE: Replace au.com.mydomain with your own domain name.
-  // This is for part 1 mentioned in my LinkedIn article
+
+  // This is for part 1 mentioned in my LinkedIn article.
+  // Platform method name.
   static const platformForBatteryLevelAPICall =
     MethodChannel('au.com.mydomain.batterylevel/battery');
 
+  // Platform method name.
   // This is for part 2 mentioned in my LinkedIn article
   static const platformForComputationCall =
     MethodChannel('au.com.mydomain.batterylevel/computation');
 
-  // Get battery level - for part 1
+  // Get battery level error string if no result - for part 1
   String _batteryLevel = 'Unknown battery level.';
 
-  // Get computation result - for part 2
+  // Get computation result error string if no result - for part 2
   String _computationResult = 'Unknown computation result.';
-
-  void computationData() {
-    Map<String, dynamic> compData = {
-      'compData_1': 4,
-      'compData_2': 11,
-    };
-  }
 
   // This is for part 1 mentioned in my LinkedIn article
   // This method gets called when the 'Get Battery Level' button is pressed.
@@ -108,11 +104,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   // This is for part 2 mentioned in my LinkedIn article
-  // This method gets called when the 'Get Computation Result' button is pressed.
+  // This method gets called when the 'Get Computation Result'
+  // button is pressed.
+  // We are passing in two integer values which will be
+  // put into a JSON structure which will then be passed
+  // to the platform method 'getComputationResult'.
   Future<void> _getComputationResult(int x, int y) async {
     String computationResult;
     try {
-      // Computation  data passed to the platform code.
+      // Computation  data passed to the platform code
+      // as JSON structure.
       Map<String, dynamic> compData = {
         'compData_1': x,
         'compData_2': y,

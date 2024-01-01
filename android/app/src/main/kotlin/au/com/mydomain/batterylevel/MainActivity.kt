@@ -28,6 +28,8 @@ class MainActivity: FlutterActivity() {
     // This is for part 1 mentioned in my LinkedIn article
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
+
+        // Set up platform method call handler - for part 1 mentioned in my LinkedIn article
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL_FOR_BATTERY_LEVEL_API_CALL).setMethodCallHandler {
                 call, result ->
             // This method is invoked on the main thread.
@@ -72,10 +74,11 @@ class MainActivity: FlutterActivity() {
 
     // This is the platform method which gets
     // called to return the percentage battery
-    // level value. We have different calls
-    // depending on the platform Android
-    // versions we are on.
-    // This is for part 1 mentioned in my LinkedIn article
+    // level value as an integer.
+    // We have different calls depending
+    // on the platform Android versions
+    // we are on. This is for part 1
+    // mentioned in my LinkedIn article.
     private fun getBatteryLevel(): Int {
         val batteryLevel: Int
         // Material Design was first implemented in Android 5.0 API level 21

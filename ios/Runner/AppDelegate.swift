@@ -78,7 +78,7 @@ import Flutter
      let device = UIDevice.current
      device.isBatteryMonitoringEnabled = true
      // NOTE: Battery state does NOT work on iOS simulators, only real iOS devices.
-     if device.batteryState == UIDevice.BatteryState.unknown {
+     if (device.batteryState == UIDevice.BatteryState.unknown) {
          result(FlutterError(code: "UNAVAILABLE",
                              message: "Battery level not available.",
                              details: nil))
