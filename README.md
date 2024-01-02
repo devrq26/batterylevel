@@ -1,16 +1,10 @@
 # batterylevel
 
-A new Flutter project.
+This Flutter project demonstrates how to make platform specific API calls, 
+as well as how to call your own platform-specific function to process arbitrary 
+data passed into the platform function and have a value returned.
 
-## Getting Started
+It is based on my LinkedIn article "Interfacing Flutter With Native Platforms - Parts 1 and 2"
+URL: https://www.linkedin.com/pulse/interfacing-flutter-native-platforms-parts-1-2-reinhold-quillen-foe0c
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
