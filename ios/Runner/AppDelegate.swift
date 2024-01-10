@@ -20,21 +20,20 @@ import Flutter
         batteryChannel.setMethodCallHandler({
             [weak self] (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
                 // This method is invoked on the UI thread.
-                // If the guard statement fails (returns 'false),
-                // when the call method name doesn't match our 
+                // When the call method name doesn't match our
                 // channel name - we return 
                 // FlutterMethodNotImplemented 
                 // in the result.
-                guard call.method == "getBatteryLevel" else {
-                    result(FlutterMethodNotImplemented)
-                    return
-                }
-                // The call method name matched ours, 
-                // so we are good to go.
-                // Calling receiveBatteryLevel(), 
-                // which either gives us 
+            if (call.method == "getBatteryLevel") {
+                // The call method name matched ours,
+                // hence we are good to go.
+                // Calling receiveBatteryLevel(),
+                // which either gives us
                 // a result or an error code & message.
                 self?.receiveBatteryLevel(result: result)
+            } else {
+                result(FlutterMethodNotImplemented)
+                }
             })
 
         // This is for part 2 mentioned in my LinkedIn article
@@ -44,28 +43,27 @@ import Flutter
         compResultChannel.setMethodCallHandler({
             [weak self] (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
                 // This method is invoked on the UI thread.
-                // If the guard statement fails (returns 'false),
                 // when the call method name doesn't match our
                 // channel name - we return
                 // FlutterMethodNotImplemented
                 // in the result.
  
-                guard call.method == "getComputationResult" else {
+                if (call.method == "getComputationResult") {
+                    // The call method name matched ours,
+                    // so we are good to go.
+                    // Calling computerResult(), which either
+                    // gives us a result or an error code & message.
+                    let compData = call.arguments as! [String:Any]
+                
+                    // Convert Any datatype to Int - use conditional downcasting to Int.
+                    // Ideally you should use constants for the JSON string key names.
+                    let first = compData["compData_1"] as? Int
+                    let second = compData["compData_2"] as? Int
+                    self?.computeResult(x:first ?? 0, y:second ?? 0, result: result)
+                } else {
                     result(FlutterMethodNotImplemented)
-                    return
                 }
-                // The call method name matched ours,
-                // so we are good to go.
-                // Calling computerResult(), which either
-                // gives us a result or an error code & message.
-                let compData = call.arguments as! [String:Any]
-            
-                // Convert Any datatype to Int - use conditional downcasting to Int.
-                // Ideally you should use constants for the JSON string key names.
-                var first = compData["compData_1"] as? Int
-                var second = compData["compData_2"] as? Int
-                self?.computeResult(x:first ?? 0, y:second ?? 0, result: result)
-                })
+            })
       
         GeneratedPluginRegistrant.register(with: self)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
